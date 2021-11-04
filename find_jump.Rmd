@@ -1,0 +1,27 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+# set up
+stock <- read.csv(file = 'TLSA.csv')
+head(stock)
+close_stock_dif<-stock[-c(1),"Close"]-stock[-c(nrow(stock)),"Close"]
+close_stock_dif_ratio<-close_stock_dif/stock[-c(1),"Close"]
+close_stock_dif_ratio<-data.frame(close_stock_dif_ratio)
+names(close_stock_dif_ratio)<-"daily_percent_change"
+```
+```{r}
+print('total days') 
+nrow(stock)
+print('jump percentage') 
+jump <- 0.1
+print(jump)
+print('sum')
+sum(close_stock_dif_ratio$daily_percent_change>jump)
+print('jump indices')
+which(close_stock_dif_ratio$daily_percent_change>jump)
+```
+
+
